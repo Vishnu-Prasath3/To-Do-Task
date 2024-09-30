@@ -1,12 +1,13 @@
 import './App.css'
-import Todoform from './components/Todoform'
+import Context from './components/Context';
 
 function App() {
-
+  
+  
 
   return (
     <>
-    <Todoform />    
+   <Context></Context>
     </>
   )
 }

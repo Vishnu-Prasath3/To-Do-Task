@@ -1,18 +1,27 @@
-import {useState} from 'react'
+import {useContext } from 'react'
+import { data } from './Context';
+
+
 
 function Todoform() {
-    const[state,setstate]=useState([])
-    let data=[...state];
-    //  [data]=[...state];
+ const{setdata=()=>{}}=useContext(data);
+  // const[state,setstate]=useState([])
+    // let Rdata=[...state];
+    let Rdata=[];
     const handlsubmit=(e)=>{
     e.preventDefault();
-    // console.log(e.target.name.value);
-    // console.log(e.target.desc.value);
-    data.push({name:e.target.desc.value,desc:e.target.name.value});
+    //  console.log(e.target.name.value);
+    //  console.log(e.target.desc.value);
+    
+    Rdata.push({name:e.target.name.value,desc:e.target.desc.value });
+    setdata(Rdata);
     e.target.name.value="";
     e.target.desc.value="";
-    setstate(data);
+    // console.log(Rdata);  
     }
+    // useEffect(()=>{
+
+    // },[Rdata])  
 
   return (
     <>
