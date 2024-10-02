@@ -6,7 +6,7 @@ import Todolist from "./Todolist"
 export let data=createContext();
 
 function Context() {
-    const[indata,setdata]=useState();
+    const[indata,setdata]=useState([]);
      
   return (
     <>

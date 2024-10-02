@@ -1,32 +1,45 @@
-import { useContext,useEffect} from "react"
+import { useContext, useEffect,useState } from "react";
 import { data } from "./Context";
+import "../components/Todo.css";
 
 
 function Todolist() {
-  let {indata,setdata}=useContext(data)
-//   useEffect(()=>{
+  let { indata, setdata} = useContext(data);
+  let[update,setupdate]=useState([])
 
-console.log(indata);
-
-// },[setdata])
-
+    
+    
+    const handleDel = (index) => {
+      let filtered=[...update].filter((ele,i)=>i!=index)
+      setdata(filtered);
+      
+     
+    }
   return (
     <>
-  {/* {indata.map((a,index)=>(<li key={index.name}>{a.name}</li>))} */}
-
-    <div className="card" >
-    <div className="card-body">
-    <h5 className="card-title"></h5>
-    <h6 className="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
-    <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" className="card-link">Card link</a>
-    <a href="#" className="card-link">Another link</a>
-  </div>
-</div>
-
-</>
-  )
+      {indata &&
+        indata.map((ele, index) => (
+          <div className="Maincard" key={index}>
+            <div key={index} className="card">
+              <div className="card-body">
+                <h5 className="card-title">{ele.name}</h5>
+                <h6 className="card-subtitle mb-2 text-body-secondary"></h6>
+                <p className="card-text">{ele.desc}</p>
+                <a href="#" className="card-link"></a>
+                <a href="#" className="card-link"></a>
+                <button className="Button-card"
+                  onClick={() => {
+                    handleDel(index);
+                  }}
+                >
+                  Remove ToDO
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
+    </>
+  );
 }
-
-
-export default Todolist
+export let update;
+export default Todolist;
