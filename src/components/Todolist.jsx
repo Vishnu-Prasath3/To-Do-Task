@@ -1,20 +1,27 @@
-import { useContext, useEffect,useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { data } from "./Context";
 import "../components/Todo.css";
 
-
 function Todolist() {
-  let { indata, setdata} = useContext(data);
-  let[update,setupdate]=useState([])
+  let {
+    indata,
+    setdata = () => {
+      return dummy(1);
+    },
+  } = useContext(data);
+  let [update, setupdate] = useState([]);
+  update = indata;
 
-    
-    
-    const handleDel = (index) => {
-      let filtered=[...update].filter((ele,i)=>i!=index)
-      setdata(filtered);
-      
-     
-    }
+  //handle-deleted-task
+  const handleDel = (index) => {
+    let deleted = update.filter((ele, i) => i != index);
+    console.log(deleted);
+    setupdate(deleted);
+    setdata(deleted);
+  };
+  // handle edit
+  const iscomplete = () => {};
+
   return (
     <>
       {indata &&
@@ -27,7 +34,8 @@ function Todolist() {
                 <p className="card-text">{ele.desc}</p>
                 <a href="#" className="card-link"></a>
                 <a href="#" className="card-link"></a>
-                <button className="Button-card"
+                <button
+                  className="Button-card"
                   onClick={() => {
                     handleDel(index);
                   }}
