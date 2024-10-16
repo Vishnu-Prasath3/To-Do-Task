@@ -3,12 +3,7 @@ import { data } from "./Context";
 import "../components/Todo.css";
 
 function Todolist() {
-  let {
-    indata,
-    setdata = () => {
-      return dummy(1);
-    },
-  } = useContext(data);
+  let { indata, setdata } = useContext(data);
   let [update, setupdate] = useState([]);
   update = indata;
 
@@ -20,7 +15,9 @@ function Todolist() {
     setdata(deleted);
   };
   // handle edit
-  const iscomplete = () => {};
+  const handlecomplete = (id, status) => {
+    console.log(update);
+  };
 
   return (
     <>
@@ -29,9 +26,23 @@ function Todolist() {
           <div className="Maincard" key={index}>
             <div key={index} className="card">
               <div className="card-body">
-                <h5 className="card-title">{ele.name}</h5>
+                <h5
+                  className="card-title"
+                  style={{
+                    textDecoration: ele.iscomplete ? "line-through" : "",
+                  }}
+                >
+                  {ele.name}
+                </h5>
                 <h6 className="card-subtitle mb-2 text-body-secondary"></h6>
-                <p className="card-text">{ele.desc}</p>
+                <p
+                  className="card-text"
+                  style={{
+                    textDecoration: ele.iscomplete ? "line-through" : "",
+                  }}
+                >
+                  {ele.desc}
+                </p>
                 <a href="#" className="card-link"></a>
                 <a href="#" className="card-link"></a>
                 <button
@@ -41,6 +52,14 @@ function Todolist() {
                   }}
                 >
                   Remove ToDO
+                </button>
+                <button
+                  onClick={() => {
+                    handlecomplete(index, ele.iscomplete);
+                    // ele.iscomplete = true;
+                  }}
+                >
+                  completed!
                 </button>
               </div>
             </div>

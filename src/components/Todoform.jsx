@@ -7,7 +7,7 @@ function Todoform() {
 //to handle submit
   const handlsubmit = (e) => {
     e.preventDefault();
-    Rdata.push({ name: e.target.name.value, desc: e.target.desc.value });
+    Rdata.push({ name: e.target.name.value, desc: e.target.desc.value,iscomplete:false });
     setdata(Rdata);
     e.target.name.value = "";
     e.target.desc.value = "";
