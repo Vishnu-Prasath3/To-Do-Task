@@ -1,11 +1,26 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { data } from "./Context";
 import "../components/Todo.css";
 
 function Todolist() {
   let { indata, setdata } = useContext(data);
   let [update, setupdate] = useState([]);
-  update = indata;
+  let [searchQuery, setSearchQuery] = useState("");
+  
+  // Ensure update is synchronized with indata
+  useEffect(() => {
+    setupdate(indata);
+  }, [indata]);
+
+  // Search function
+  const getFilteredTodos = () => {
+    if (!searchQuery.trim()) return update;
+    
+    return update.filter((todo) =>
+      todo.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      todo.desc.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  };
 
   //handle-deleted-task
   const handleDel = (index) => {
@@ -16,7 +31,15 @@ function Todolist() {
   };
   // handle edit
   const handlecomplete = (id, status) => {
-    console.log(update);
+    const updatedTodos = update.map((todo, index) => {
+      if (index === id) {
+        return { ...todo, iscomplete: !status };
+      }
+      return todo;
+    });
+    
+    setupdate(updatedTodos);
+    setdata(updatedTodos);
   };
 
   return (
@@ -38,11 +61,10 @@ function Todolist() {
                 <p
                   className="card-text"
                   style={{
-                    textDecoration: ele.iscomplete ? "line-through" : "",
-                  }}
+                    textDecoration: ele.iscomplete ? "line-through" : "",color:"black"}}
                 >
                   {ele.desc}
-                </p>
+                </p>  
                 <a href="#" className="card-link"></a>
                 <a href="#" className="card-link"></a>
                 <button

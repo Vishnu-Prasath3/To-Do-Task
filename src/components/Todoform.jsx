@@ -15,7 +15,10 @@ function Todoform() {
   
   return (
     <>
-      <div>
+      <nav className="navbar">
+        <h2>Todo App</h2>
+      </nav>
+      <div className="todo-form">
         <h1>My Todo</h1>
         <form onSubmit={handlsubmit}>
           <input
@@ -23,6 +26,7 @@ function Todoform() {
             required
             name="name"
             placeholder="To-Do-Name"
+            className="input-field"
           ></input>
           {/* <input    ></input> */}
           <textarea
@@ -30,8 +34,9 @@ function Todoform() {
             type="text"
             required
             placeholder="To-Do-Description"
+            className="textarea-field"
           ></textarea>
-          <button type="submit">Add ToDO</button>
+          <button type="submit" className="submit-button">Add ToDO</button>
         </form>
       </div>
     </>
