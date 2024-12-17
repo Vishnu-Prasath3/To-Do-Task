@@ -24,8 +24,7 @@ function Todolist() {
 
   //handle-deleted-task
   const handleDel = (index) => {
-    let deleted = update.filter((ele, i) => i != index);
-    console.log(deleted);
+    let deleted = update.filter((ele, i) => i !== index);
     setupdate(deleted);
     setdata(deleted);
   };
@@ -44,49 +43,42 @@ function Todolist() {
 
   return (
     <>
-      {indata &&
-        indata.map((ele, index) => (
-          <div className="Maincard" key={index}>
-            <div key={index} className="card">
-              <div className="card-body">
-                <h5
-                  className="card-title"
-                  style={{
-                    textDecoration: ele.iscomplete ? "line-through" : "",
-                  }}
-                >
-                  {ele.name}
-                </h5>
-                <h6 className="card-subtitle mb-2 text-body-secondary"></h6>
-                <p
-                  className="card-text"
-                  style={{
-                    textDecoration: ele.iscomplete ? "line-through" : "",color:"black"}}
-                >
-                  {ele.desc}
-                </p>  
-                <a href="#" className="card-link"></a>
-                <a href="#" className="card-link"></a>
-                <button
-                  className="Button-card"
-                  onClick={() => {
-                    handleDel(index);
-                  }}
-                >
-                  Remove ToDO
-                </button>
-                <button
-                  onClick={() => {
-                    handlecomplete(index, ele.iscomplete);
-                    // ele.iscomplete = true;
-                  }}
-                >
-                  completed!
-                </button>
-              </div>
+      {update.map((ele, index) => (
+        <div className="Maincard" key={index}>
+          <div className="card">
+            <div className="card-body">
+              <h5
+                className="card-title"
+                style={{
+                  textDecoration: ele.iscomplete ? "line-through" : "",
+                }}
+              >
+                {ele.name}
+              </h5>
+              <p
+                className="card-text"
+                style={{
+                  textDecoration: ele.iscomplete ? "line-through" : "",
+                  color: "black",
+                }}
+              >
+                {ele.desc}
+              </p>
+              <button
+                className="Button-card"
+                onClick={() => handleDel(index)}
+              >
+                Remove ToDO
+              </button>
+              <button
+                onClick={() => handlecomplete(index, ele.iscomplete)}
+              >
+                completed!
+              </button>
             </div>
           </div>
-        ))}
+        </div>
+      ))}
     </>
   );
 }
